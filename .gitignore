@@ -92,3 +92,5 @@ sw.*
 .eslintrc.js
 .editorconfig
 .prettierrc
+
+/server/config.json
