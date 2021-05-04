@@ -2,7 +2,7 @@ import Task from '../models/task';
 
 class TaskService {
   async getAll() {
-    return Task.find();
+    return Task.find().select('-description').sort({ createdAt: -1 });
   }
 
   async getOne(id) {

@@ -1,0 +1,48 @@
+* {
+  outline: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+  font-family: sans-serif;
+
+  --header-bg: #007cc7;
+  --main-bg: #12232e;
+  --task-bg: #203647;
+  --danger-bg: #d64949;
+
+  --main-color: #eefbfb;
+  --secondary-color: #4da8da;
+}
+
+body {
+  background: var(--main-bg);
+}
+
+.app {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  max-width: 1360px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.row {
+  margin-bottom: 1em;
+}
+
+@import './typography';
+@import './buttons-links';

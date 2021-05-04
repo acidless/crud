@@ -1,0 +1,42 @@
+a,
+.btn-link {
+  font-size: 3rem;
+  padding: 0;
+  background: none;
+  min-width: auto;
+  border: none;
+  color: var(--main-color);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    background: none;
+    transform: none;
+    color: var(--secondary-color);
+  }
+}
+
+button {
+  background: var(--secondary-color);
+  border: none;
+  padding: 0.5em 0.75em;
+  border-radius: 0.25em;
+  color: var(--main-color);
+  min-width: 5em;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s ease-in-out;
+
+  &:hover {
+    background: var(--header-bg);
+    transform: scale(1.05);
+  }
+}
+
+.btn-danger {
+  background: var(--danger-bg);
+
+  &:hover {
+    background: var(--danger-bg);
+  }
+}
