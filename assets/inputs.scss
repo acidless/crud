@@ -1,8 +1,16 @@
-input {
+input,
+textarea {
   background: var(--main-bg);
   color: var(--main-color);
   border: none;
   padding: 0.5em;
   min-width: 10em;
   font-size: 2rem;
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+  max-height: 50vh;
+  min-height: 5em;
 }

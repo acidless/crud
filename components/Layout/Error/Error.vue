@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     closeError() {
+      // Убираем значение ошибки, для скрытия окна
       this.$store.commit('setError', null);
     },
   },

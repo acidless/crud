@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import TaskList from '~/components/pages/index/tasks/TaskList';
-import CreateTask from '~/components/pages/index/createTask/CreateTask';
+import CreateTask from '@/components/Pages/Index/CreateTask/CreateTask';
+import TaskList from '@/components/Pages/Index/Tasks/TaskList';
+
 export default {
   name: 'Index',
   components: { CreateTask, TaskList },

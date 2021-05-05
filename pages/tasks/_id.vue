@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Task from '~/components/pages/index/tasks/task/Task';
+import Task from '@/components/Pages/Index/Tasks/Task/Task';
 
 export default {
   name: 'CurrentTask',
@@ -16,6 +16,7 @@ export default {
       currentTask: 'currentTask',
     }),
   },
+
   mounted() {
     this.$store.dispatch('getCurrentTask', this.$route.params.id);
   },

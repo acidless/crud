@@ -1,12 +1,17 @@
 <template>
   <div class="create-task">
     <button @click="() => setCreateMode(true)">+</button>
-    <TaskDialog :is-opened="isCreateMode" :set-opened="setCreateMode" />
+    <TaskDialog
+      :is-create-mode="true"
+      :is-opened="isCreateMode"
+      :set-opened="setCreateMode"
+    />
   </div>
 </template>
 
 <script>
-import TaskDialog from '@/components/pages/index/createTask/TaskDialog/TaskDialog';
+import TaskDialog from '@/components/Pages/Index/CreateTask/TaskDialog/TaskDialog';
+
 export default {
   name: 'CreateTask',
   components: { TaskDialog },

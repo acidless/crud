@@ -1,3 +1,5 @@
+import catchPromise from '@/utils/catchPromise';
+
 function state() {
   return { tasks: [], currentTask: null };
 }
@@ -14,37 +16,41 @@ const mutations = {
 
 const actions = {
   getTasks({ commit }) {
-    this.$axios
-      .$get('tasks')
-      .then((data) => {
+    catchPromise(
+      commit,
+      this.$axios.$get('tasks').then((data) => {
         commit('setTasks', data.data);
       })
-      .catch((e) => commit('setError', e.response.data.message));
+    );
   },
 
   getCurrentTask({ commit }, id) {
-    this.$axios
-      .$get(`tasks/${id}`)
-      .then((data) => {
+    catchPromise(
+      commit,
+      this.$axios.$get(`tasks/${id}`).then((data) => {
+        if (!data.data) {
+          return Promise.reject('Task with this id not found');
+        }
+
         commit('setCurrentTask', data.data);
       })
-      .catch((e) => commit('setError', e.response.data.message));
+    );
   },
 
   createTask({ commit, state }, task) {
-    this.$axios
-      .$post(`tasks`, task)
-      .then((data) => {
+    catchPromise(
+      commit,
+      this.$axios.$post(`tasks`, task).then((data) => {
         commit('setTasks', [data.data, ...state.tasks]);
       })
-      .catch((e) => commit('setError', e.response.data.message));
+    );
   },
 
   updateTask({ commit, state }, task) {
-    this.$axios
-      .$patch(`tasks/${task.id}`, task)
-      .then((data) => {
-        if (state.currentTask._id === data.data._id) {
+    catchPromise(
+      commit,
+      this.$axios.$patch(`tasks/${task.id}`, task).then((data) => {
+        if (state.currentTask?._id === data.data._id) {
           commit('setCurrentTask', data.data);
         }
 
@@ -59,19 +65,19 @@ const actions = {
           })
         );
       })
-      .catch((e) => commit('setError', e.response.data.message));
+    );
   },
 
   removeTask({ commit, state }, id) {
-    this.$axios
-      .$delete(`/tasks/${id}`)
-      .then(() => {
+    catchPromise(
+      commit,
+      this.$axios.$delete(`/tasks/${id}`).then(() => {
         commit(
           'setTasks',
           state.tasks.filter((task) => task._id !== id)
         );
       })
-      .catch((e) => commit('setError', e.response.data.message));
+    );
   },
 };
 

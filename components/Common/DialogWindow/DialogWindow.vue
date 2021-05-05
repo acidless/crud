@@ -1,5 +1,5 @@
 <template>
-  <dialog v-if="isOpened" @click="closeWindow" class="dialog-wrapper">
+  <dialog v-if="isOpened" @mousedown="closeWindow" class="dialog-wrapper">
     <div class="dialog-inner">
       <slot></slot>
     </div>

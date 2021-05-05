@@ -1,6 +1,6 @@
 export default function unselectVersionKey(schema) {
-  schema.pre(/^find/, function (next) {
-    this.select('-__v');
-    next();
-  });
+  const options = { versionKey: false };
+
+  schema.options.toObject = options;
+  schema.options.toJSON = options;
 }

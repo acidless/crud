@@ -5,7 +5,11 @@
         <nuxt-link :to="`/tasks/${task._id}`">{{ task.title }}</nuxt-link>
       </h3>
       <div class="task__actions">
-        <button @click="() => setUpdateWindowOpened(true)" class="btn-link">
+        <button
+          v-if="fullData"
+          @click="() => setUpdateWindowOpened(true)"
+          class="btn-link"
+        >
           &#9998;
         </button>
         <button @click="() => setDeleteWindowOpened(true)" class="btn-link">
@@ -22,10 +26,11 @@
     <TaskDeleteDialog
       :is-delete-window-opened="isDeleteWindowOpened"
       :set-delete-window-opened="setDeleteWindowOpened"
-      :task="task"
+      :task-id="task._id"
     />
     <TaskDialog
-      :task-id="task._id"
+      v-if="fullData"
+      :task-values="task"
       :is-opened="isUpdateWindowOpened"
       :set-opened="setUpdateWindowOpened"
     />
@@ -33,9 +38,10 @@
 </template>
 
 <script>
-import DialogWindow from '~/components/common/DialogWindow/DialogWindow';
-import TaskDeleteDialog from '@/components/pages/Index/Tasks/Task/TaskDeleteDialog/TaskDeleteDialog';
-import TaskDialog from '@/components/pages/index/createTask/TaskDialog/TaskDialog';
+import TaskDialog from '@/components/Pages/Index/CreateTask/TaskDialog/TaskDialog';
+import TaskDeleteDialog from '@/components/Pages/Index/Tasks/Task/TaskDeleteDialog/TaskDeleteDialog';
+import DialogWindow from '@/components/Common/DialogWindow/DialogWindow';
+
 export default {
   name: 'Task',
   components: { TaskDialog, TaskDeleteDialog, DialogWindow },

@@ -3,7 +3,7 @@
     <h4 class="align-center row">{{ operationType }} a task</h4>
     <form @submit="submit" class="task-form">
       <input v-model="task.title" type="text" placeholder="Title" />
-      <input v-model="task.description" type="text" placeholder="Description" />
+      <textarea placeholder="Description" v-model="task.description"></textarea>
       <div class="align-center">
         <button>{{ operationType }}</button>
       </div>
@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import DialogWindow from '~/components/common/DialogWindow/DialogWindow';
+import DialogWindow from '@/components/Common/DialogWindow/DialogWindow';
+
 export default {
   components: { DialogWindow },
   props: {
@@ -25,18 +26,27 @@ export default {
       type: Function,
       required: true,
     },
-
     isCreateMode: Boolean,
-    taskId: String,
+    taskValues: Object,
   },
 
   data() {
     return {
       task: {
-        title: undefined,
-        description: undefined,
+        title: null,
+        description: null,
       },
     };
+  },
+
+  mounted() {
+    this.setTaskValues();
+  },
+
+  watch: {
+    taskValues() {
+      this.setTaskValues();
+    },
   },
 
   computed: {
@@ -46,19 +56,31 @@ export default {
   },
 
   methods: {
+    setTaskValues() {
+      this.$data.task = {
+        title: this.$props.taskValues?.title,
+        description: this.$props.taskValues?.description,
+      };
+    },
+
     submit(e) {
       e.preventDefault();
       const task = this.$data.task;
       const createMode = this.$props.isCreateMode;
 
+      // Если значение - пустая строка, присваиваем undefined
       Object.keys(task).forEach((key) => {
         task[key] = task[key]?.trim() || undefined;
       });
 
+      // В зависимости от типа действия (создание или обновление) диспатчим экшн
       if (createMode) {
         this.$store.dispatch('createTask', task);
       } else {
-        this.$store.dispatch('updateTask', { id: this.$props.taskId, ...task });
+        this.$store.dispatch('updateTask', {
+          id: this.$props.taskValues._id,
+          ...task,
+        });
       }
 
       this.$props.setOpened(false);
@@ -71,6 +93,10 @@ export default {
 .task-form {
   input {
     display: block;
+  }
+
+  input,
+  textarea {
     margin: 0 auto 0.75em auto;
   }
 }

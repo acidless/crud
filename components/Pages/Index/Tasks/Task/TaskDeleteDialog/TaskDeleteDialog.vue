@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import DialogWindow from '~/components/common/DialogWindow/DialogWindow';
+import DialogWindow from '@/components/Common/DialogWindow/DialogWindow';
 
 export default {
   name: 'TaskDeleteDialog',
   components: { DialogWindow },
   props: {
-    task: {
-      type: Object,
+    taskId: {
+      type: String,
       required: true,
     },
     isDeleteWindowOpened: {
@@ -33,7 +33,8 @@ export default {
   },
   methods: {
     removeTask() {
-      this.$store.dispatch('removeTask', this.$props.task._id);
+      this.$store.dispatch('removeTask', this.$props.taskId);
+      this.$props.setDeleteWindowOpened(false);
     },
   },
 };
