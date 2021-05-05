@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-import config from './config.json';
 
 function connect() {
   mongoose
-    .connect(config.mongoConnectionString, {
+    .connect(process.env.MONGO_DB_STRING, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -11,7 +10,6 @@ function connect() {
     })
     .catch((e) => {
       console.error(e);
-      process.exit(1);
     });
 }
 

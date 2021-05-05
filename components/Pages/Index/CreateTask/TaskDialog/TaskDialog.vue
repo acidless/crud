@@ -68,9 +68,9 @@ export default {
       const task = this.$data.task;
       const createMode = this.$props.isCreateMode;
 
-      // Если значение - пустая строка, присваиваем undefined
+      // Если значение - пустая строка, присваиваем null
       Object.keys(task).forEach((key) => {
-        task[key] = task[key]?.trim() || undefined;
+        task[key] = task[key]?.trim() || null;
       });
 
       // В зависимости от типа действия (создание или обновление) диспатчим экшн
@@ -84,6 +84,7 @@ export default {
       }
 
       this.$props.setOpened(false);
+      this.setTaskValues();
     },
   },
 };
