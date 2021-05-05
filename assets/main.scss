@@ -28,6 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 main {
@@ -46,3 +47,4 @@ main {
 
 @import './typography';
 @import './buttons-links';
+@import './inputs';

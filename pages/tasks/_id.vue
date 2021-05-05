@@ -1,12 +1,12 @@
 <template>
   <div class="current-task-wrapper container" v-if="currentTask">
-    <Task :task="currentTask" />
+    <Task :full-data="true" :task="currentTask" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Task from '~/components/tasks/task/Task';
+import Task from '~/components/pages/index/tasks/task/Task';
 
 export default {
   name: 'CurrentTask',

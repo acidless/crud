@@ -4,12 +4,14 @@
     <main>
       <Nuxt />
     </main>
+    <Error />
   </div>
 </template>
 
 <script>
 import Header from '~/components/layout/header/Header';
+import Error from '~/components/layout/error/Error';
 export default {
-  components: { Header },
+  components: { Error, Header },
 };
 </script>

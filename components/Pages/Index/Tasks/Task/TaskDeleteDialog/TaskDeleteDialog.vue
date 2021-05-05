@@ -3,8 +3,8 @@
     :is-opened="isDeleteWindowOpened"
     :set-opened="setDeleteWindowOpened"
   >
-    <h4 class="row">Are you realy want to delete this task?</h4>
-    <div class="task__actions">
+    <h4 class="row align-center">Are you realy want to delete this task?</h4>
+    <div class="task-dialog__buttons">
       <button @click="() => setDeleteWindowOpened(false)">No</button>
       <button class="btn-danger" @click="removeTask">Yes</button>
     </div>
@@ -38,3 +38,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.task-dialog__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

@@ -14,7 +14,7 @@ class TaskService {
   }
 
   async update(id, data) {
-    return Task.findByIdAndUpdate(id, data, { new: true });
+    return Task.findByIdAndUpdate(id, data, { new: true, runValidators: true });
   }
 
   async delete(id) {

@@ -4,11 +4,16 @@
       <h3 class="task__title">
         <nuxt-link :to="`/tasks/${task._id}`">{{ task.title }}</nuxt-link>
       </h3>
-      <button @click="isDeleteWindowOpened = true" class="btn-link">
-        &times;
-      </button>
+      <div class="task__actions">
+        <button @click="() => setUpdateWindowOpened(true)" class="btn-link">
+          &#9998;
+        </button>
+        <button @click="() => setDeleteWindowOpened(true)" class="btn-link">
+          &#10006;
+        </button>
+      </div>
     </div>
-    <p class="task__description" v-if="task.description">
+    <p class="task__description" v-if="fullData && task.description">
       {{ task.description }}
     </p>
     <time class="task__creation-date">{{
@@ -19,31 +24,43 @@
       :set-delete-window-opened="setDeleteWindowOpened"
       :task="task"
     />
+    <TaskDialog
+      :task-id="task._id"
+      :is-opened="isUpdateWindowOpened"
+      :set-opened="setUpdateWindowOpened"
+    />
   </div>
 </template>
 
 <script>
 import DialogWindow from '~/components/common/DialogWindow/DialogWindow';
-import TaskDeleteDialog from '~/components/tasks/task/taskDeleteDialog/taskDeleteDialog';
+import TaskDeleteDialog from '@/components/pages/Index/Tasks/Task/TaskDeleteDialog/TaskDeleteDialog';
+import TaskDialog from '@/components/pages/index/createTask/TaskDialog/TaskDialog';
 export default {
   name: 'Task',
-  components: { TaskDeleteDialog, DialogWindow },
+  components: { TaskDialog, TaskDeleteDialog, DialogWindow },
   props: {
     task: {
       type: Object,
       required: true,
     },
+    fullData: Boolean,
   },
 
   data() {
     return {
       isDeleteWindowOpened: false,
+      isUpdateWindowOpened: false,
     };
   },
 
   methods: {
     setDeleteWindowOpened(value) {
       this.$data.isDeleteWindowOpened = value;
+    },
+
+    setUpdateWindowOpened(value) {
+      this.$data.isUpdateWindowOpened = value;
     },
   },
 };
@@ -56,11 +73,16 @@ export default {
   padding: 1em;
   border-radius: 0.5em;
 
-  .task__header,
-  .task__actions {
+  .task__header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+  }
+
+  .task__actions {
+    button:not(:last-child) {
+      margin-right: 0.25em;
+    }
   }
 
   .task__title {

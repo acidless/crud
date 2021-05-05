@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Task from '~/components/tasks/task/Task';
+import Task from '~/components/pages/index/tasks/task/Task';
 
 export default {
   name: 'TaskList',
